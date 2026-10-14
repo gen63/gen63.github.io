@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>バドミントン練習管理 - 移転のお知らせ</title>
+  <style>
+    :root { --bg: #f3f4f6; --fg: #111827; --muted: #4b5563; --accent: #2563eb; --card: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #111827; --fg: #f3f4f6; --muted: #9ca3af; --accent: #3b82f6; --card: #1f2937; }
+    }
+    body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+           background: var(--bg); color: var(--fg); font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; }
+    main { box-sizing: border-box; width: 100%; max-width: 28rem; margin: 16px; padding: 28px 20px; text-align: center;
+           background: var(--card); border-radius: 12px; }
+    h1 { font-size: 1.25rem; margin: 0 0 12px; }
+    p { margin: 0 0 16px; color: var(--muted); line-height: 1.6; font-size: 0.9rem; }
+    a.go { display: inline-block; padding: 12px 20px; border-radius: 8px; background: var(--accent); color: #fff;
+           text-decoration: none; font-weight: 600; }
+    #url { word-break: break-all; font-size: 0.75rem; margin-top: 16px; margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>新しいURLへ移動しました</h1>
+    <p>バドミントン練習管理は、新しいURLに移転しました。下のリンクから開いてください。<br>
+       端末の設定（GAS URL など）とユーザーの選択は、新しいURLで再設定が必要です。</p>
+    <a id="go" class="go" href="https://even-bm.web.app/">新しいURLを開く</a>
+    <p id="url">https://even-bm.web.app/</p>
+  </main>
+  <script>
+    (function () {
+      var NEW_ORIGIN = 'https://even-bm.web.app/';
+      var path = '';
+      var search = location.search;
+      if (search.indexOf('?/') === 0) {
+        // 旧 GitHub Pages の SPA リダイレクト形式（?/session/ABC~and~x=y）を復元する
+        path = search.slice(2).replace(/~and~/g, '&');
+      } else {
+        path = location.pathname.replace(/^\/badminton-manager\/?/, '');
+      }
+      path = path.replace(/^\/+/, '');
+      var target = NEW_ORIGIN + path + location.hash;
+      document.getElementById('go').href = target;
+      document.getElementById('url').textContent = target;
+    })();
+  </script>
+</body>
+</html>
